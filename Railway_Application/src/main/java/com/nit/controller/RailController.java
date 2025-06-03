@@ -46,7 +46,7 @@ public class RailController
 	@GetMapping("/welcome")
 	public String welcomePage(Model m)
 	{
-		m.addAttribute("welcome", m);
+//		m.addAttribute("welcome", m);
 		return "welcome";	
 	}
 	
@@ -54,7 +54,7 @@ public class RailController
 	@GetMapping("/login")
 	public String  loginPage(Model m) 
 	{
-		m.addAttribute("login", m);
+//		m.addAttribute("login", m);
 		return "login";
 	}
 	
@@ -62,7 +62,7 @@ public class RailController
 	@GetMapping("/register")
 	public String  registerPage(Model m) 
 	{
-		m.addAttribute("register", m);
+//		m.addAttribute("register", m);
 		return "register";
 	}
 	
