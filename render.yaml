@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: railway-project
+    rootDir: Railway_Application
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/Railway_Application-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: PORT
+        value: 8080
