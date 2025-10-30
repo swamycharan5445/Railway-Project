@@ -11,4 +11,6 @@ public interface RailRepository extends JpaRepository<RailwayData, Integer>
 {
 	 RailwayData findByUsernameAndPassword(String username, String password);
 	 RailwayData findByUsername(String username);
+	 List<RailwayData> findByEmail(String email);
+	 List<RailwayData> findByPhonenumber(String phonenumber);
 }

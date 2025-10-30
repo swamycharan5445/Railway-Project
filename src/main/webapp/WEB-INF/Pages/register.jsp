@@ -89,11 +89,12 @@
             <label for="confirmpassword">Confirm Password</label>
             <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Confirm password" required>
 
+            <h4 style="background-color: red;">${data}</h4>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter email" required>
+            <input type="text" id="email" name="email" placeholder="Enter email" required>
 
             <label for="phonenumber">Phone Number</label>
-            <input type="tel" id="phonenumber" name="phonenumber" placeholder="Enter phone number" required pattern="[0-9]{10}" title="Enter 10-digit phone number">
+            <input type="text" id="phonenumber" name="phonenumber" placeholder="Enter phone number" required>
 
             <input type="submit" value="Register">
         </form>
