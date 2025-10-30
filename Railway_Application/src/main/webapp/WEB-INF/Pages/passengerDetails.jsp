@@ -86,44 +86,7 @@
         }
     </style>
 
- <!--    <script>
-        let passengerCount = 1;
-
-        function addPassenger() {
-            if (passengerCount >= 4) {
-                document.getElementById("limitMsg").innerText = "⚠️ Maximum of 4 passengers allowed per booking.";
-                return;
-            }
-
-            const index = passengerCount;
-            passengerCount++;
-
-            const container = document.getElementById("passengerContainer");
-            const div = document.createElement("div");
-            div.className = "passenger-block";
-            div.innerHTML = `
-                <h3 style="color: #ff9f43;">Passenger ${index + 1}</h3>
-                <input type="text" name="passengers[${index}].name" placeholder="Name" required>
-                <input type="number" name="passengers[${index}].age" placeholder="Age" required>
-                <select name="passengers[${index}].gender" required>
-                    <option value="">Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-                <select name="passengers[${index}].berthPref">
-                    <option value="">No Preference</option>
-                    <option value="Lower">Lower</option>
-                    <option value="Middle">Middle</option>
-                    <option value="Upper">Upper</option>
-                    <option value="Side Lower">Side Lower</option>
-                    <option value="Side Upper">Side Upper</option>
-                </select>
-            `;
-            container.appendChild(div);
-            document.getElementById("limitMsg").innerText = "";
-        }
-    </script> -->
+ 
 </head>
 <body>
 <div class="container">
@@ -133,7 +96,7 @@
 
         <div id="passengerContainer">
             <div class="passenger-block">
-                <h3 style="color: #ff9f43;">Passenger 1</h3>
+                <h3 style="color: #ff9f43;">Passenger </h3>
                 <input type="text" name="name" placeholder="Name" required>
                 <input type="number" name="age" placeholder="Age" required>
                 <select name="gender" required>

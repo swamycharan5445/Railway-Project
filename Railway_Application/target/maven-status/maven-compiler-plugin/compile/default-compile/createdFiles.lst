@@ -1,9 +1,10 @@
+com\nit\service\RailServiceImpl.class
+com\nit\service\RailService.class
 com\nit\repository\PassengerRepository.class
 com\nit\repository\RailRepository.class
 com\nit\model\PassengerData.class
 com\nit\ServletInitializer.class
 com\nit\RailwayApplication.class
-com\nit\service\RailServiceInterface.class
 com\nit\repository\BookingRepository.class
 com\nit\model\BookingData.class
 com\nit\repository\TrainRepository.class

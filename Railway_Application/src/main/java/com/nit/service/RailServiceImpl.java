@@ -13,7 +13,8 @@ import com.nit.repository.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
-public class RailServiceImpl implements RailService {
+public class RailServiceImpl implements RailService 
+{
 
     @Autowired
     private RailRepository railRepository;
@@ -28,24 +29,47 @@ public class RailServiceImpl implements RailService {
     private PassengerRepository passengerRepository;
 
     @Override
-    public String registerUser(RailwayData railwayData, String password, String confirmPassword) {
-        if (password.equals(confirmPassword)) {
-            railRepository.save(railwayData);
-            return "success";
-        }
-        return "fail";
+    public String registerUser(RailwayData railwayData, String password, String confirmPassword,String email,String phonenumber) 
+    {
+    	System.err.println("------------------------------");
+    	System.err.println(password);
+    	System.err.println(confirmPassword);
+    	System.err.println(email);
+    	System.err.println(phonenumber);
+    	
+    	List<RailwayData> byEmail = railRepository.findByEmail(email);
+    	System.err.println(byEmail.get(0).getEmail()+"---------------------");
+    	List<RailwayData> byPhonenumber = railRepository.findByPhonenumber(phonenumber);
+    	System.err.println(byPhonenumber.get(0).getPhonenumber()+"-------------------");
+    	
+    	
+    	if(email==byEmail.get(0).getEmail())
+    	{
+    		System.err.println("success");
+    		if (password.equals(confirmPassword)) 
+            {
+                railRepository.save(railwayData);
+                return "success";
+            }
+            return "fail";
+    	}
+    	return "Datapresent";
+        
     }
 
     @Override
-    public String loginUser(String username, String password) {
+    public String loginUser(String username, String password) 
+    {
         RailwayData user = railRepository.findByUsernameAndPassword(username, password);
         return user != null ? "success" : "fail";
     }
 
     @Override
-    public String resetPassword(String username, String newPassword, String confirmPassword) {
+    public String resetPassword(String username, String newPassword, String confirmPassword) 
+    {
         RailwayData user = railRepository.findByUsername(username);
-        if (user != null && newPassword.equals(confirmPassword)) {
+        if (user != null && newPassword.equals(confirmPassword)) 
+        {
             user.setPassword(newPassword);
             user.setConfirmpassword(confirmPassword);
             railRepository.save(user);
@@ -55,47 +79,56 @@ public class RailServiceImpl implements RailService {
     }
 
     @Override
-    public List<RailwayData> getAllUsers() {
+    public List<RailwayData> getAllUsers() 
+    {
         return railRepository.findAll();
     }
 
     @Override
-    public List<TrainData> getTrainList(String fromStation, String toStation) {
+    public List<TrainData> getTrainList(String fromStation, String toStation) 
+    {
         return trainRepository.findByFromStationAndToStation(fromStation, toStation);
     }
 
     @Override
-    public List<BookingData> getBookingsByDateSeatQuota(LocalDate date, String seatclass, String quota) {
+    public List<BookingData> getBookingsByDateSeatQuota(LocalDate date, String seatclass, String quota)
+    {
         return bookingRepository.findByDateOfJourney(date);
     }
 
     @Override
-    public List<BookingData> getBookingsBySeatclass(String seatclass) {
+    public List<BookingData> getBookingsBySeatclass(String seatclass) 
+    {
         return bookingRepository.findBySeatclass(seatclass);
     }
 
     @Override
-    public List<BookingData> getBookingsByQuota(String quota) {
+    public List<BookingData> getBookingsByQuota(String quota)
+    {
         return bookingRepository.findByQuota(quota);
     }
 
     @Override
-    public BookingData saveBooking(BookingData bookingData) {
+    public BookingData saveBooking(BookingData bookingData) 
+    {
         return bookingRepository.save(bookingData);
     }
 
     @Override
-    public PassengerData savePassenger(PassengerData passengerData) {
+    public PassengerData savePassenger(PassengerData passengerData)
+    {
         return passengerRepository.save(passengerData);
     }
 
     @Override
-    public TrainData getTrainById(Integer trainNo) {
+    public TrainData getTrainById(Integer trainNo) 
+    {
         return trainRepository.findById(trainNo).orElse(null);
     }
 
     @Override
-    public Double calculatePrice(TrainData train, String seatclass) {
+    public Double calculatePrice(TrainData train, String seatclass) 
+    {
         return switch (seatclass) {
             case "Sleeper" -> train.getSleeper();
             case "First AC" -> train.getFirstAC();
@@ -106,7 +139,8 @@ public class RailServiceImpl implements RailService {
     }
 
     @Override
-    public String generateTransactionId() {
+    public String generateTransactionId() 
+    {
         return "TXN" + System.currentTimeMillis();
     }
 
@@ -117,7 +151,8 @@ public class RailServiceImpl implements RailService {
                                                     List<BookingData> byDateOfJourney,
                                                     List<TrainData> byFromStationAndToStation,
                                                     HttpServletRequest request,
-                                                    Model model) {
+                                                    Model model) 
+    {
         savePassenger(passengerData);
 
         Integer trainNo = Integer.parseInt(request.getParameter("trainNo"));
@@ -125,6 +160,7 @@ public class RailServiceImpl implements RailService {
 
         String seatClass = bySeatclass.get(0).getSeatclass();
         String quota = byQuota.get(0).getQuota();
+        
         Double price = calculatePrice(train, seatClass);
         String transactionId = generateTransactionId();
 

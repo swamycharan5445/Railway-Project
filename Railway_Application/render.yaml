@@ -15,5 +15,8 @@ services:
         value: root
       - key: SPRING_DATASOURCE_PASSWORD
         value: WydNrtIWrPPdNqQbuNZPusPLUiRxCZHH
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9279bac (Added Dockerfile and render.yml for Render deployment)

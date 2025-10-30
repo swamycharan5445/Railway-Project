@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public interface RailService {
 
-    String registerUser(RailwayData railwayData, String password, String confirmPassword);
+    String registerUser(RailwayData railwayData, String password, String confirmPassword,String email,String phonenumber);
 
     String loginUser(String username, String password);
 

@@ -14,7 +14,8 @@ import com.nit.service.RailService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
-public class RailController {
+public class RailController 
+{
 
     @Autowired
     private RailService railService;
@@ -25,52 +26,68 @@ public class RailController {
     private List<BookingData> byQuota;
 
     @GetMapping("/welcome")
-    public String welcomePage(Model m) {
+    public String welcomePage(Model m) 
+    {
         return "welcome";
     }
 
     @GetMapping("/login")
-    public String loginPage(Model m) {
+    public String loginPage(Model m) 
+    {
         return "login";
     }
 
     @GetMapping("/register")
-    public String registerPage(Model m) {
+    public String registerPage(Model m) 
+    {
         return "register";
     }
 
     @PostMapping("/register")
     public String registerPage2(@ModelAttribute RailwayData railwayData,
+    		                    @RequestParam String email,
+    		                    @RequestParam String phonenumber,
                                  @RequestParam String password,
                                  @RequestParam String confirmpassword,
-                                 Model m) {
+                                 Model m) 
+    {
 
-        String result = railService.registerUser(railwayData, password, confirmpassword);
-        if ("success".equals(result)) {
+        String result = railService.registerUser(railwayData, password, confirmpassword,email,phonenumber);
+        System.err.println(result+"   result of controller");
+        if ("success".equals(result)) 
+        {
             m.addAttribute("message", railService.getAllUsers());
             return "login";
-        } else {
+        } 
+        else 
+        {
             m.addAttribute("msg", "Password And ConfirmPassword must be Same");
-            return "registerFail";
+            m.addAttribute("data", "email found in my database");
+            return "register";
         }
     }
 
     @PostMapping("/login")
     public String loginPage2(@RequestParam String username,
                               @RequestParam String password,
-                              Model m) {
+                              Model m) 
+    {
         String result = railService.loginUser(username, password);
-        if ("success".equals(result)) {
+        if ("success".equals(result)) 
+        {
             m.addAttribute("success", "UserName And Password is Correct");
             return "booking";
-        } else {
+        }
+        else 
+        {
             m.addAttribute("error", "Invalid Username or Password");
             return "fail";
         }
     }
 
     @GetMapping("/forgot-password")
-    public String forgotPasswordForm() {
+    public String forgotPasswordForm() 
+    {
         return "forgotPassword";
     }
 
@@ -78,7 +95,8 @@ public class RailController {
     public String resetPassword(@RequestParam String username,
                                 @RequestParam String newPassword,
                                 @RequestParam String confirmPassword,
-                                Model m) {
+                                Model m) 
+    {
         String result = railService.resetPassword(username, newPassword, confirmPassword);
         return "success".equals(result) ? "login" : "fail";
     }
@@ -90,7 +108,8 @@ public class RailController {
                               @RequestParam String quota,
                               @RequestParam LocalDate dateOfJourney,
                               @ModelAttribute BookingData bookingData,
-                              Model m) {
+                              Model m) 
+    {
 
         railService.saveBooking(bookingData);
 
@@ -105,7 +124,8 @@ public class RailController {
     }
 
     @PostMapping("/bookTrain")
-    public String trainDetails(HttpServletRequest request, Model m) {
+    public String trainDetails(HttpServletRequest request, Model m) 
+    {
         m.addAttribute("trainNumber", request.getParameter("selectedTrain"));
         return "passengerDetails";
     }
@@ -113,7 +133,8 @@ public class RailController {
     @PostMapping("/submitPassengers")
     public String passengerData(@ModelAttribute PassengerData passengerData,
                                 Model m,
-                                HttpServletRequest request) {
+                                HttpServletRequest request) 
+    {
 
         return railService.processPassengerAndGenerateTicket(passengerData, bySeatclass, byQuota, byDateOfJourney, byFromStationAndToStation, request, m);
     }

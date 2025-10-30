@@ -22,6 +22,7 @@ public class RailwayData
 	private String password;
 	private String confirmpassword;
 	private String email;
+	
 	private String phonenumber;
 
 }
