@@ -2,13 +2,18 @@ services:
   - type: web
     name: railway-application
     env: java
-    buildCommand: "./mvnw clean install -DskipTests"
+    buildCommand: "./mvnw clean package -DskipTests"
     startCommand: "java -jar target/Railway_Application-0.0.1-SNAPSHOT.jar"
     envVars:
+      - key: JAVA_VERSION
+        value: 17
+      - key: PORT
+        value: 8080
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:mysql://localhost:3306/railway_application
+        value: jdbc:mysql://switchback.proxy.rlwy.net:37430/railway
       - key: SPRING_DATASOURCE_USERNAME
         value: root
       - key: SPRING_DATASOURCE_PASSWORD
-        value: charan
+        value: WydNrtIWrPPdNqQbuNZPusPLUiRxCZHH
+
 
